@@ -1,0 +1,6 @@
+import {readFile,access} from 'node:fs/promises';import {createHash} from 'node:crypto';
+const pages=['dist/index.html','dist/minha-dialise/index.html','dist/renal-food/index.html'];let count=0;
+for(const path of pages){const html=await readFile(path,'utf8');if((html.match(/<h1[ >]/g)||[]).length!==1)throw Error('H1: '+path);for(const m of html.matchAll(/(?:href|src)="([^"]+)"/g)){const value=m[1];if(!value.startsWith('/'))continue;const [route,anchor]=value.split('#');const local='dist'+(route==='/'?'/index.html':route.endsWith('/')?route+'index.html':route);await access(local);if(anchor){const linked=await readFile(local,'utf8');if(!linked.includes('id="'+anchor+'"'))throw Error('Missing anchor '+value);}count++;}if(!html.includes('mailto:heitorhenriquesales@icloud.com')||!html.includes('tel:+5548988028366'))throw Error('Contact missing');}
+const hashes=JSON.parse(await readFile('src/logo-hashes.json','utf8'));
+for(const [name,expected] of Object.entries(hashes)){const bytes=await readFile('dist/assets/'+name);if(createHash('sha256').update(bytes).digest('hex')!==expected)throw Error('Logo changed: '+name);}
+console.log(`PASS: ${pages.length} routes, ${count} local links/assets, heading structure, contact links and original logo hashes.`);
