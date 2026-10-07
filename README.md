@@ -2,6 +2,12 @@
 
 Projeto completo e independente, preparado para GitHub e Vercel. Inclui a landing page, duas páginas de produtos, três logos oficiais, estilos, animações e código-fonte organizado. Sem backend, chaves de API ou dependências de execução do ChatGPT.
 
+
+## Atualização de produto — outubro de 2026
+
+- **Minha Diálise:** aplicativo funcional com fluxos para **Diálise Peritoneal e Hemodiálise**.
+- **Renal Food:** **protótipo funcional em testes**, com câmera, leitura de código de barras e **realidade aumentada (AR)** para apoiar a compreensão e comparação de alimentos no contexto da saúde renal.
+
 ## Publicar pelo GitHub na Vercel
 
 1. Descompacte o ZIP.
